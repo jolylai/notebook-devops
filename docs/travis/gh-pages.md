@@ -1,4 +1,4 @@
-## Github Pages
+# Github Pages
 
 代码提交到 github 仓库时，自动将最新的代码部署到 gh-pages 中
 
@@ -31,6 +31,7 @@ deploy:
 ```
 
 ## 更多配置
+
 - `local_dir`: Directory to push to GitHub Pages, defaults to current directory. Can be specified as an absolute path or a relative path from the current directory.
 - `repo`: Repo slug, defaults to current repo.
 - `target_branch`: Branch to (force, see: keep_history) push local_dir contents to, defaults to gh-pages.
@@ -40,7 +41,11 @@ deploy:
 - `email`: Optional, committer info, defaults to deploy@travis-ci.org.
 - `name`: Optional, committer, defaults to Deployment Bot.
 - `committer_from_gh`: Optional, defaults to false. Allows you to use the token’s owner name and email for commit. Overrides email and name options.
-- `allow_empty`_commit: Optional, defaults to false. Enabled if only keep_history is true.
+- `allow_empty`\_commit: Optional, defaults to false. Enabled if only keep_history is true.
 - `github_url`: Optional, the URL of the self-hosted GitHub enterprise, defaults to github.com.
 - `verbose`: Optional, be verbose about internal steps, defaults to false.
 - `deployment_file`: Optional, defaults to false, enables creation of deployment-info files.
+
+## 相关文章
+
+[travis-deploy-to-gh-pages](https://voorhoede.github.io/front-end-tooling-recipes/travis-deploy-to-gh-pages/)

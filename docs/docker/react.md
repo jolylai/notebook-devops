@@ -1,4 +1,5 @@
-# React
+# React项目部署
+使用docker部署react项目
 
 ## 配置 nginx
 
