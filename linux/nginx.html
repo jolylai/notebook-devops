@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nginx | Devops</title>
+    <meta name="description" content="🚀 持续构建">
+    <link rel="icon" href="/notebook-devops/favicon.ico">
+    
+    <link rel="preload" href="/notebook-devops/assets/css/0.styles.410fc542.css" as="style"><link rel="preload" href="/notebook-devops/assets/js/app.361ba318.js" as="script"><link rel="preload" href="/notebook-devops/assets/js/2.c0cc02e9.js" as="script"><link rel="preload" href="/notebook-devops/assets/js/16.34fac9ff.js" as="script"><link rel="prefetch" href="/notebook-devops/assets/js/10.ecbade9e.js"><link rel="prefetch" href="/notebook-devops/assets/js/11.85ea046c.js"><link rel="prefetch" href="/notebook-devops/assets/js/12.2b32bb75.js"><link rel="prefetch" href="/notebook-devops/assets/js/13.44635f02.js"><link rel="prefetch" href="/notebook-devops/assets/js/14.86fafa70.js"><link rel="prefetch" href="/notebook-devops/assets/js/15.56ea264c.js"><link rel="prefetch" href="/notebook-devops/assets/js/17.b9e99d85.js"><link rel="prefetch" href="/notebook-devops/assets/js/18.ec96e507.js"><link rel="prefetch" href="/notebook-devops/assets/js/19.951e26dc.js"><link rel="prefetch" href="/notebook-devops/assets/js/20.019c776b.js"><link rel="prefetch" href="/notebook-devops/assets/js/21.23b03ebf.js"><link rel="prefetch" href="/notebook-devops/assets/js/22.37f6eaa0.js"><link rel="prefetch" href="/notebook-devops/assets/js/3.dd5706d6.js"><link rel="prefetch" href="/notebook-devops/assets/js/4.e0a346e7.js"><link rel="prefetch" href="/notebook-devops/assets/js/5.0b0b5417.js"><link rel="prefetch" href="/notebook-devops/assets/js/6.34f62b92.js"><link rel="prefetch" href="/notebook-devops/assets/js/7.31cf17e3.js"><link rel="prefetch" href="/notebook-devops/assets/js/8.60aa2cdf.js"><link rel="prefetch" href="/notebook-devops/assets/js/9.0ae4bb38.js">
+    <link rel="stylesheet" href="/notebook-devops/assets/css/0.styles.410fc542.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/notebook-devops/" class="home-link router-link-active"><!----> <span class="site-name">Devops</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/notebook-devops/travis/" class="nav-link">Travis</a></div><div class="nav-item"><a href="/notebook-devops/docker/start/" class="nav-link">Docker</a></div><div class="nav-item"><a href="/notebook-devops/github/" class="nav-link">Github</a></div><div class="nav-item"><a href="/notebook-devops/linux/" class="nav-link router-link-active">Linux</a></div> <a href="https://github.com/Jolylai/notebook-devops" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/notebook-devops/travis/" class="nav-link">Travis</a></div><div class="nav-item"><a href="/notebook-devops/docker/start/" class="nav-link">Docker</a></div><div class="nav-item"><a href="/notebook-devops/github/" class="nav-link">Github</a></div><div class="nav-item"><a href="/notebook-devops/linux/" class="nav-link router-link-active">Linux</a></div> <a href="https://github.com/Jolylai/notebook-devops" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/notebook-devops/linux/" class="sidebar-link">常用命令</a></li><li><a href="/notebook-devops/linux/nginx.html" class="active sidebar-link">Nginx</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/notebook-devops/linux/nginx.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/notebook-devops/linux/nginx.html#上传静态文件到服务器" class="sidebar-link">上传静态文件到服务器</a></li><li class="sidebar-sub-header"><a href="/notebook-devops/linux/nginx.html#配置-nginx" class="sidebar-link">配置 nginx</a></li><li class="sidebar-sub-header"><a href="/notebook-devops/linux/nginx.html#nginx-配置文件" class="sidebar-link">nginx 配置文件</a></li><li class="sidebar-sub-header"><a href="/notebook-devops/linux/nginx.html#重启" class="sidebar-link">重启</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="nginx"><a href="#nginx" aria-hidden="true" class="header-anchor">#</a> Nginx</h1> <h2 id="安装"><a href="#安装" aria-hidden="true" class="header-anchor">#</a> 安装</h2> <h3 id="ubuntu"><a href="#ubuntu" aria-hidden="true" class="header-anchor">#</a> Ubuntu</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update
+$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nginx
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>文件结构</p> <ul><li>所有的配置文件都在<code>/etc/nginx</code> 下，并且每个虚拟主机已经安排在了<code>/etc/nginx/sites-available</code> 下</li> <li>程序文件在<code>/usr/sbin/nginx</code></li> <li>日志放在了<code>/var/log/nginx</code> 中</li> <li>并已经在<code>/etc/init.d/</code>下创建了启动脚本 nginx</li> <li>默认的虚拟主机的目录设置在了<code>/var/www/nginx-default</code> (有的版本 默认的虚拟主机的目录设置在了/var/www, 请参考/etc/nginx/sites-available 里的配置)</li></ul> <h2 id="上传静态文件到服务器"><a href="#上传静态文件到服务器" aria-hidden="true" class="header-anchor">#</a> 上传静态文件到服务器</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ <span class="token function">scp</span> -r * root@198.199.103.100:/var/www/jgefroh.com
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="配置-nginx"><a href="#配置-nginx" aria-hidden="true" class="header-anchor">#</a> 配置 nginx</h2> <p><code>cd</code> 到 <code>/etc/nginx</code> 这里存放 nginx 配置文件</p> <ul><li>默认的目录为 <code>/var/www/html/</code></li> <li>默认配置 <code>/etc/nginx</code></li></ul> <p>关注 <code>sites-available</code> 和 <code>sites-enabled</code> 这两个文件夹</p> <ul><li><code>sites-available</code> contains individual configuration files for all of your possible static websites.</li> <li><code>sites-enabled</code> contains links to the configuration files that NGINX will actually read and run.</li></ul> <p>在<code>sites-available</code> 文件夹中 创建 <code>jgefroh.com</code> 文件</p> <div class="language-nginx line-numbers-mode"><pre class="language-nginx"><code><span class="token keyword">server</span> <span class="token punctuation">{</span>
+  <span class="token keyword">listen</span> <span class="token number">8000</span> default_server<span class="token punctuation">;</span>
+  <span class="token keyword">listen</span> <span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token number">8000</span> default_server<span class="token punctuation">;</span>
+  <span class="token keyword">root</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>jgefroh<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+  <span class="token keyword">index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">server_name</span> _<span class="token punctuation">;</span>
+  <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try_files</span> <span class="token variable">$uri</span> <span class="token variable">$uri</span><span class="token operator">/</span> <span class="token operator">=</span><span class="token number">404</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>将文件添加到<code>sites-enabled</code>以此告诉 nginx 来启用我们的配置</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ln</span> -s <span class="token operator">&lt;</span>SOURCE_FILE<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>DESTINATION_FILE<span class="token operator">&gt;</span>
+
+<span class="token function">ln</span> -s /etc/nginx/sites-available/jgefroh.com /etc/nginx/sites-enabled/jgefroh.com
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>重启 nginx 并查看效果</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ <span class="token function">sudo</span> systemctl restart nginx
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="nginx-配置文件"><a href="#nginx-配置文件" aria-hidden="true" class="header-anchor">#</a> nginx 配置文件</h2> <h3 id="基础设置说明"><a href="#基础设置说明" aria-hidden="true" class="header-anchor">#</a> 基础设置说明</h3> <div class="language-nginx line-numbers-mode"><pre class="language-nginx"><code><span class="token comment">#运行用户</span>
+<span class="token keyword">user</span> www<span class="token operator">-</span>data<span class="token punctuation">;</span>
+<span class="token comment">#启动进程,通常设置成和cpu的数量相等</span>
+<span class="token keyword">worker_processes</span>  <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment">#全局错误日志及PID文件</span>
+<span class="token keyword">error_log</span>  <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>error<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
+<span class="token keyword">pid</span>        <span class="token operator">/</span>var<span class="token operator">/</span>run<span class="token operator">/</span>nginx<span class="token punctuation">.</span><span class="token keyword">pid</span><span class="token punctuation">;</span>
+
+<span class="token comment">#工作模式及连接数上限</span>
+<span class="token keyword">events</span> <span class="token punctuation">{</span>
+    <span class="token comment"># epoll是多路复用IO(I/O Multiplexing)中的一种方式</span>
+    <span class="token comment"># 但是仅用于linux2.6以上内核,可以大大提高nginx的性能</span>
+    <span class="token keyword">use</span>   epoll<span class="token punctuation">;</span>
+    <span class="token comment">#单个后台worker process进程的最大并发链接数</span>
+    <span class="token keyword">worker_connections</span>  <span class="token number">1024</span><span class="token punctuation">;</span>
+    <span class="token comment"># multi_accept on;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">#设定http服务器，利用它的反向代理功能提供负载均衡支持</span>
+<span class="token keyword">http</span> <span class="token punctuation">{</span>
+     <span class="token comment">#设定mime类型,类型由mime.type文件定义</span>
+    <span class="token keyword">include</span>       <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>mime<span class="token punctuation">.</span><span class="token keyword">types</span><span class="token punctuation">;</span>
+    <span class="token keyword">default_type</span>  application<span class="token operator">/</span>octet<span class="token operator">-</span>stream<span class="token punctuation">;</span>
+    <span class="token comment">#设定日志格式</span>
+    <span class="token keyword">access_log</span>    <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>access<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
+
+    <span class="token comment"># sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件</span>
+    <span class="token comment"># 对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用</span>
+    <span class="token comment"># 可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.</span>
+    <span class="token keyword">sendfile</span>        on<span class="token punctuation">;</span>
+    <span class="token comment">#tcp_nopush     on;</span>
+
+    <span class="token comment">#连接超时时间</span>
+    <span class="token comment">#keepalive_timeout  0;</span>
+    <span class="token keyword">keepalive_timeout</span>  <span class="token number">65</span><span class="token punctuation">;</span>
+    <span class="token keyword">tcp_nodelay</span>        on<span class="token punctuation">;</span>
+
+    <span class="token comment">#开启gzip压缩</span>
+    <span class="token keyword">gzip</span>  on<span class="token punctuation">;</span>
+    <span class="token keyword">gzip_disable</span> <span class="token string">&quot;MSIE [1-6]\.(?!.*SV1)&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#设定请求缓冲</span>
+    <span class="token keyword">client_header_buffer_size</span>    <span class="token number">1</span>k<span class="token punctuation">;</span>
+    <span class="token keyword">large_client_header_buffers</span>  <span class="token number">4</span> <span class="token number">4</span>k<span class="token punctuation">;</span>
+
+    <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>conf<span class="token punctuation">.</span>d<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>sites<span class="token operator">-</span>enabled<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#设定负载均衡的服务器列表</span>
+    <span class="token keyword">upstream</span> mysvr <span class="token punctuation">{</span>
+      <span class="token comment">#weigth参数表示权值，权值越高被分配到的几率越大</span>
+      <span class="token comment">#本机上的Squid开启3128端口</span>
+      <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">3128</span> weight<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.2</span><span class="token punctuation">:</span><span class="token number">80</span>  weight<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.3</span><span class="token punctuation">:</span><span class="token number">80</span>  weight<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">server</span> <span class="token punctuation">{</span>
+      <span class="token comment">#侦听80端口</span>
+      <span class="token keyword">listen</span>       <span class="token number">80</span><span class="token punctuation">;</span>
+      <span class="token comment">#定义使用www.xx.com访问</span>
+      <span class="token keyword">server_name</span>  www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+
+      <span class="token comment">#设定本虚拟主机的访问日志</span>
+      <span class="token keyword">access_log</span>  logs<span class="token operator">/</span>www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">.</span>access<span class="token punctuation">.</span>log  main<span class="token punctuation">;</span>
+
+      <span class="token comment">#默认请求</span>
+      <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">root</span>   <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>      <span class="token comment">#定义服务器的默认网站根目录位置</span>
+        <span class="token keyword">index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>php <span class="token keyword">index</span><span class="token punctuation">.</span>html <span class="token keyword">index</span><span class="token punctuation">.</span>htm<span class="token punctuation">;</span>   <span class="token comment">#定义首页索引文件的名称</span>
+
+        <span class="token keyword">fastcgi_pass</span>  www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">fastcgi_param</span>  SCRIPT_FILENAME  <span class="token variable">$document_root</span><span class="token operator">/</span><span class="token variable">$fastcgi_script_name</span><span class="token punctuation">;</span>
+        <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>fastcgi_params<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment"># 定义错误提示页面</span>
+      <span class="token keyword">error_page</span>   <span class="token number">500</span> <span class="token number">502</span> <span class="token number">503</span> <span class="token number">504</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+          <span class="token keyword">location</span> <span class="token operator">=</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html <span class="token punctuation">{</span>
+          <span class="token keyword">root</span>   <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">#静态文件，nginx自己处理</span>
+      <span class="token keyword">location</span> <span class="token operator">~</span> <span class="token operator">^</span><span class="token operator">/</span><span class="token punctuation">(</span>images<span class="token operator">|</span>javascript<span class="token operator">|</span>js<span class="token operator">|</span>css<span class="token operator">|</span>flash<span class="token operator">|</span>media<span class="token operator">|</span>static<span class="token punctuation">)</span><span class="token operator">/</span> <span class="token punctuation">{</span>
+          <span class="token keyword">root</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>virtual<span class="token operator">/</span>htdocs<span class="token punctuation">;</span>
+          <span class="token comment">#过期30天，静态文件不怎么更新，过期可以设大一点，如果频繁更新，则可以设置得小一点。</span>
+          <span class="token keyword">expires</span> <span class="token number">30</span>d<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">#PHP 脚本请求全部转发到 FastCGI处理. 使用FastCGI默认配置.</span>
+      <span class="token keyword">location</span> <span class="token operator">~</span> \<span class="token punctuation">.</span>php$ <span class="token punctuation">{</span>
+          <span class="token keyword">root</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>
+          <span class="token keyword">fastcgi_pass</span> <span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">9000</span><span class="token punctuation">;</span>
+          <span class="token keyword">fastcgi_index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>php<span class="token punctuation">;</span>
+          <span class="token keyword">fastcgi_param</span> SCRIPT_FILENAME <span class="token operator">/</span>home<span class="token operator">/</span>www<span class="token operator">/</span>www<span class="token variable">$fastcgi_script_name</span><span class="token punctuation">;</span>
+          <span class="token keyword">include</span> fastcgi_params<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">#设定查看Nginx状态的地址</span>
+      <span class="token keyword">location</span> <span class="token operator">/</span>NginxStatus <span class="token punctuation">{</span>
+          <span class="token keyword">stub_status</span>            on<span class="token punctuation">;</span>
+          <span class="token keyword">access_log</span>              on<span class="token punctuation">;</span>
+          <span class="token keyword">auth_basic</span>              <span class="token string">&quot;NginxStatus&quot;</span><span class="token punctuation">;</span>
+          <span class="token keyword">auth_basic_user_file</span>  conf<span class="token operator">/</span>htpasswd<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token comment">#禁止访问 .htxxx 文件</span>
+      <span class="token keyword">location</span> <span class="token operator">~</span> <span class="token operator">/</span>\<span class="token punctuation">.</span>ht <span class="token punctuation">{</span>
+          <span class="token keyword">deny</span> all<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br></div></div><h3 id="设置负载均衡"><a href="#设置负载均衡" aria-hidden="true" class="header-anchor">#</a> 设置负载均衡</h3> <div class="language-nginx line-numbers-mode"><pre class="language-nginx"><code><span class="token comment">#运行用户</span>
+<span class="token keyword">user</span> www<span class="token operator">-</span>data<span class="token punctuation">;</span>
+<span class="token comment"># 启动进程,通常设置成和cpu的数量相等</span>
+<span class="token keyword">worker_processes</span>  <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 全局错误日志及PID文件</span>
+<span class="token keyword">error_log</span>  <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>error<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
+<span class="token keyword">pid</span>        <span class="token operator">/</span>var<span class="token operator">/</span>run<span class="token operator">/</span>nginx<span class="token punctuation">.</span><span class="token keyword">pid</span><span class="token punctuation">;</span>
+
+<span class="token comment">#工作模式及连接数上限</span>
+<span class="token keyword">events</span> <span class="token punctuation">{</span>
+    <span class="token comment"># epoll是多路复用IO(I/O Multiplexing)中的一种方式</span>
+    <span class="token comment"># 但是仅用于linux2.6以上内核,可以大大提高nginx的性能</span>
+    <span class="token keyword">use</span>   epoll<span class="token punctuation">;</span>
+    <span class="token keyword">worker_connections</span>  <span class="token number">1024</span><span class="token punctuation">;</span><span class="token comment">#单个后台worker process进程的最大并发链接数</span>
+    <span class="token comment"># multi_accept on;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment"># 设定http服务器，利用它的反向代理功能提供负载均衡支持</span>
+<span class="token keyword">http</span> <span class="token punctuation">{</span>
+     <span class="token comment">#设定mime类型,类型由mime.type文件定义</span>
+    <span class="token keyword">include</span>       <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>mime<span class="token punctuation">.</span><span class="token keyword">types</span><span class="token punctuation">;</span>
+    <span class="token keyword">default_type</span>  application<span class="token operator">/</span>octet<span class="token operator">-</span>stream<span class="token punctuation">;</span>
+    <span class="token comment">#设定日志格式</span>
+    <span class="token keyword">access_log</span>    <span class="token operator">/</span>var<span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>access<span class="token punctuation">.</span>log<span class="token punctuation">;</span>
+
+    <span class="token comment"># sendfile 指令指定 nginx 是否调用 sendfile 函数（zero copy 方式）来输出文件</span>
+    <span class="token comment"># 对于普通应用，必须设为 on,如果用来进行下载等应用磁盘IO重负载应用</span>
+    <span class="token comment"># 可设置为 off，以平衡磁盘与网络I/O处理速度，降低系统的uptime.</span>
+    <span class="token keyword">sendfile</span>        on<span class="token punctuation">;</span>
+    <span class="token comment">#tcp_nopush     on;</span>
+
+    <span class="token comment">#连接超时时间</span>
+    <span class="token comment">#keepalive_timeout  0;</span>
+    <span class="token keyword">keepalive_timeout</span>  <span class="token number">65</span><span class="token punctuation">;</span>
+    <span class="token keyword">tcp_nodelay</span>        on<span class="token punctuation">;</span>
+
+    <span class="token comment">#开启gzip压缩</span>
+    <span class="token keyword">gzip</span>  on<span class="token punctuation">;</span>
+    <span class="token keyword">gzip_disable</span> <span class="token string">&quot;MSIE [1-6]\.(?!.*SV1)&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#设定请求缓冲</span>
+    <span class="token keyword">client_header_buffer_size</span>    <span class="token number">1</span>k<span class="token punctuation">;</span>
+    <span class="token keyword">large_client_header_buffers</span>  <span class="token number">4</span> <span class="token number">4</span>k<span class="token punctuation">;</span>
+
+    <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>conf<span class="token punctuation">.</span>d<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
+    <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>sites<span class="token operator">-</span>enabled<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#设定负载均衡的服务器列表</span>
+     <span class="token keyword">upstream</span> mysvr <span class="token punctuation">{</span>
+    <span class="token comment">#weigth参数表示权值，权值越高被分配到的几率越大</span>
+    <span class="token comment">#本机上的Squid开启3128端口</span>
+    <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">3128</span> weight<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.2</span><span class="token punctuation">:</span><span class="token number">80</span>  weight<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">server</span> <span class="token number">192.168</span><span class="token number">.8</span><span class="token number">.3</span><span class="token punctuation">:</span><span class="token number">80</span>  weight<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+   <span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token comment">#侦听80端口</span>
+        <span class="token keyword">listen</span>       <span class="token number">80</span><span class="token punctuation">;</span>
+        <span class="token comment">#定义使用www.xx.com访问</span>
+        <span class="token keyword">server_name</span>  www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+
+        <span class="token comment">#设定本虚拟主机的访问日志</span>
+        <span class="token keyword">access_log</span>  logs<span class="token operator">/</span>www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">.</span>access<span class="token punctuation">.</span>log  main<span class="token punctuation">;</span>
+
+    <span class="token comment">#默认请求</span>
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+          <span class="token keyword">root</span>   <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>      <span class="token comment">#定义服务器的默认网站根目录位置</span>
+          <span class="token keyword">index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>php <span class="token keyword">index</span><span class="token punctuation">.</span>html <span class="token keyword">index</span><span class="token punctuation">.</span>htm<span class="token punctuation">;</span>   <span class="token comment">#定义首页索引文件的名称</span>
+
+          <span class="token keyword">fastcgi_pass</span>  www<span class="token punctuation">.</span>xx<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+         <span class="token keyword">fastcgi_param</span>  SCRIPT_FILENAME  <span class="token variable">$document_root</span><span class="token operator">/</span><span class="token variable">$fastcgi_script_name</span><span class="token punctuation">;</span>
+          <span class="token keyword">include</span> <span class="token operator">/</span>etc<span class="token operator">/</span>nginx<span class="token operator">/</span>fastcgi_params<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token comment"># 定义错误提示页面</span>
+    <span class="token keyword">error_page</span>   <span class="token number">500</span> <span class="token number">502</span> <span class="token number">503</span> <span class="token number">504</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html<span class="token punctuation">;</span>
+        <span class="token keyword">location</span> <span class="token operator">=</span> <span class="token operator">/</span><span class="token number">50</span>x<span class="token punctuation">.</span>html <span class="token punctuation">{</span>
+        <span class="token keyword">root</span>   <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">#静态文件，nginx自己处理</span>
+    <span class="token keyword">location</span> <span class="token operator">~</span> <span class="token operator">^</span><span class="token operator">/</span><span class="token punctuation">(</span>images<span class="token operator">|</span>javascript<span class="token operator">|</span>js<span class="token operator">|</span>css<span class="token operator">|</span>flash<span class="token operator">|</span>media<span class="token operator">|</span>static<span class="token punctuation">)</span><span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">root</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>virtual<span class="token operator">/</span>htdocs<span class="token punctuation">;</span>
+        <span class="token comment">#过期30天，静态文件不怎么更新，过期可以设大一点，如果频繁更新，则可以设置得小一点。</span>
+        <span class="token keyword">expires</span> <span class="token number">30</span>d<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">#PHP 脚本请求全部转发到 FastCGI处理. 使用FastCGI默认配置.</span>
+    <span class="token keyword">location</span> <span class="token operator">~</span> \<span class="token punctuation">.</span>php$ <span class="token punctuation">{</span>
+        <span class="token keyword">root</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token punctuation">;</span>
+        <span class="token keyword">fastcgi_pass</span> <span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">9000</span><span class="token punctuation">;</span>
+        <span class="token keyword">fastcgi_index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>php<span class="token punctuation">;</span>
+        <span class="token keyword">fastcgi_param</span> SCRIPT_FILENAME <span class="token operator">/</span>home<span class="token operator">/</span>www<span class="token operator">/</span>www<span class="token variable">$fastcgi_script_name</span><span class="token punctuation">;</span>
+        <span class="token keyword">include</span> fastcgi_params<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">#设定查看Nginx状态的地址</span>
+    <span class="token keyword">location</span> <span class="token operator">/</span>NginxStatus <span class="token punctuation">{</span>
+        <span class="token keyword">stub_status</span>            on<span class="token punctuation">;</span>
+        <span class="token keyword">access_log</span>              on<span class="token punctuation">;</span>
+        <span class="token keyword">auth_basic</span>              <span class="token string">&quot;NginxStatus&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">auth_basic_user_file</span>  conf<span class="token operator">/</span>htpasswd<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">#禁止访问 .htxxx 文件</span>
+    <span class="token keyword">location</span> <span class="token operator">~</span> <span class="token operator">/</span>\<span class="token punctuation">.</span>ht <span class="token punctuation">{</span>
+        <span class="token keyword">deny</span> all<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br></div></div><h2 id="重启"><a href="#重启" aria-hidden="true" class="header-anchor">#</a> 重启</h2> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>$ <span class="token function">sudo</span> systemctl start nginx
+$ <span class="token function">sudo</span> systemctl reload nginx
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">7/17/2019, 3:00:29 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/notebook-devops/linux/" class="prev router-link-active">
+          常用命令
+        </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/notebook-devops/assets/js/app.361ba318.js" defer></script><script src="/notebook-devops/assets/js/2.c0cc02e9.js" defer></script><script src="/notebook-devops/assets/js/16.34fac9ff.js" defer></script>
+  </body>
+</html>
