@@ -10,8 +10,8 @@ docker pull mongo
 
 ### 启动
 
-```js
-docker run -p 27017:27017 -v <LocalDirectoryPath>:/data/db --name docker_mongodb -d mongo
+```bash
+$ docker run -p 27017:27017 -v <LocalDirectoryPath>:/data/db --name docker_mongodb -d mongo
 ```
 
 **Tip**
