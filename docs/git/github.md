@@ -11,18 +11,14 @@ git remote add origin https://github.com/jolylai/notebook.git
 git push -u origin master
 ```
 
-## 将项目托送到远程
+## gh-pages
 
-```bash
-git remote add origin https://github.com/jolylai/notebook.git
-git push -u origin master
-```
-
-## 将项目推送到远程 gh-pages 分支
+将代码提交到远程仓库 gh-pages 分支
 
 ```bash
 git subtree push --prefix dist origin gh-pages
-// dist 为项目的文件路径
+
+# dist 为项目的文件路径
 git subtree push --prefix docs/.vuepress/dist origin gh-pages
 ```
 
@@ -34,12 +30,23 @@ git remote set-url origin <new url>
 
 ## SSH Key
 
+查看时是否已经生成 SSH Key
+
 ```bash
-# 生成 key
+$ cd ~/.ssh
+$ ls
+id_rsa      id_rsa.pub      known_hosts
+```
+
+生成 key
+
+```bash
 ssh-keygen -t rsa -C "your.email@example.com" -b 4096
+```
 
-# 将 key 复制到黏贴板
+复制生成的公钥到粘贴板
 
+```bash
 # Git Bash on Windows / Windows PowerShell
 cat ~/.ssh/id_rsa.pub | clip
 

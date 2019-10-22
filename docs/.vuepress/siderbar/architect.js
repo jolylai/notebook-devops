@@ -1,7 +1,7 @@
 module.exports = [
   {
-    title: "Github",
+    title: "Architect",
     collapsable: false,
-    children: ["git", "github"]
+    children: ["lint"]
   }
 ];

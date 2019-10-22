@@ -17,6 +17,10 @@ $ sudo apt-get install nginx
 - 并已经在`/etc/init.d/`下创建了启动脚本 nginx
 - 默认的虚拟主机的目录设置在了`/var/www/nginx-default` (有的版本 默认的虚拟主机的目录设置在了/var/www, 请参考/etc/nginx/sites-available 里的配置)
 
+## 常用命令
+
+- `nginx -t`: 查看 nginx 安装的位置
+
 ## 上传静态文件到服务器
 
 ```bash
@@ -69,9 +73,9 @@ $ sudo systemctl restart nginx
 ### 基础设置说明
 
 ```nginx
-#运行用户
+# 运行用户
 user www-data;
-#启动进程,通常设置成和cpu的数量相等
+# 启动进程,通常设置成和cpu的数量相等
 worker_processes  1;
 
 #全局错误日志及PID文件

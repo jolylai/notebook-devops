@@ -1,5 +1,9 @@
 module.exports = [
   {
+    text: "Architect",
+    link: "/architect/lint"
+  },
+  {
     text: "Travis",
     link: "/travis/"
   },
@@ -8,8 +12,8 @@ module.exports = [
     link: "/docker/start/"
   },
   {
-    text: "Github",
-    link: "/github/"
+    text: "Git",
+    link: "/git/git/"
   },
   {
     text: "Linux",
