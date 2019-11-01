@@ -2,6 +2,6 @@ module.exports = [
   {
     title: "Linux",
     collapsable: false,
-    children: ["", "nginx"]
+    children: ["", "nginx", "sh"]
   }
 ];
