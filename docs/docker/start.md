@@ -76,37 +76,64 @@ CMD node index.js
 
 ### 查看镜像
 
+> [查看镜像列表](https://docs.docker.com/engine/reference/commandline/images/)
+
 ```bash
-# 查看本地所有 image
+# docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+# List the most recently created images
 $ docker images
+
+# List images by name and tag
+$ docker images java
+$ docker images java:0
 ```
 
 ### 创建镜像
 
+> [从 `Dockerfile` 文中创建镜像](https://docs.docker.com/engine/reference/commandline/build/)
+
 ```bash
-# 从 Dockerfile 创建 image
+# docker build [OPTIONS] PATH | URL | -
 $ docker build -t [imageName] [pathToFolder]
 $ docker build -t hello-world .
 
-# 从 container 创建 image
+# 多个环境变量
+$ docker build --build-arg HTTP=http://10:1234 --build-arg FTP=http://40:4567 .
+```
+
+常用的 Options
+
+- **--tag, -t**: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
+- **--file , -f** :指定要使用的 Dockerfile 路径；
+- **--build-arg=[]** :设置镜像创建时的变量；
+- **--rm** :设置镜像成功后删除中间容器；
+
+从 `container` 创建 `image`
+
+```bash
 $ docker commit [container] [imageName]
 ```
 
-- **--tag, -t**: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
-- **-f** :指定要使用的 Dockerfile 路径；
-- **--rm** :设置镜像成功后删除中间容器；
-- **--build-arg=[]** :设置镜像创建时的变量；
-
 ### 删除镜像
 
+> [删除一个或者多个镜像](https://docs.docker.com/engine/reference/commandline/rmi/)
+
 ```bash
-# 删除本地 image
+# docker rmi [OPTIONS] IMAGE [IMAGE...]
 $ docker rmi [image]
-# 给 image 打 tag
+```
+
+### Tag
+
+给 image 打 tag
+
+```bash
 $ docker tag [imageId] [imageName]
 ```
 
 ### 远程仓库
+
 ```bash
 # 在 registry 中搜索镜像
 $ docker search [query]
@@ -161,7 +188,9 @@ $ docker top [container]
 # 查看 container 详细信息
 $ docker inspect [container]
 ```
+
 ### 操作
+
 ```bash
 # 停止 continer
 $ docker stop [container]
@@ -179,8 +208,20 @@ $ docker restart [container]
 $ docker rm [container]
 ```
 
-## 进入容器交互模式
+## 容器交互模式
+
+进入容器交互模式
 
 ```bash
 $ docker exec -it <CONTAINER NAME> /bin/bash
+```
+
+退出容器交互模式
+
+```bash
+exit
+
+# 或者
+
+Ctrl+P+Q
 ```
