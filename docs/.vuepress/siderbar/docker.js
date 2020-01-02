@@ -2,7 +2,7 @@ module.exports = [
   {
     title: "Docker",
     collapsable: false,
-    children: ["start", "install"]
+    children: ["", "start", "install"]
   },
   {
     title: "Deploy",

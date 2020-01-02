@@ -4,16 +4,21 @@
 
 ## 配置服务器
 
+> [自动部署](https://juejin.im/post/5a9e1a5751882555712bd8e1#heading-12)
+
+安装 ruby 版本管理工具 rvm
+
 ```bash
-# 安装ruby
-$ sudo apt install ruby
+curl -sSL https://get.rvm.io | bash -s stable
 
-# 这里请翻墙一下
-$ gem update --system
+rvm version
+```
 
-# 查看版本号
-$ gem -v
-2.6.3
+安装 ruby
+
+```bash
+rvm install ruby
+ruby --version
 
 # 切换镜像源
 $ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
@@ -23,11 +28,21 @@ $ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 $ gem sources -l
 https://gems.ruby-china.com
 
-# 安装 travis
+# 这里请翻墙一下
+$ gem update --system
+
+# 查看版本号
+$ gem -v
+2.6.3
+```
+
+安装 travis
+
+```bash
 $ gem install travis
 ```
 
-## ssh
+### ssh
 
 配置 ssh 登录服务器
 

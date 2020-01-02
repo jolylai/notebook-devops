@@ -1,5 +1,12 @@
 # 常用命令
 
+## 执行权限
+
+```bash
+chmod 777 ./deploy.sh
+./deploy.sh
+```
+
 ## 复制文件
 
 ```bash

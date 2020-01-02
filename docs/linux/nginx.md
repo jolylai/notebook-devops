@@ -27,6 +27,20 @@ $ sudo apt-get install nginx
 $ scp -r * root@198.199.103.100:/var/www/jgefroh.com
 ```
 
+## 重定向
+
+将 `http://localhost/notebook-js/assets/css/0.styles.422b1f7a.css` 重定向到 `http://localhost/assets/css/0.styles.422b1f7a.css`
+
+```nginx
+server{
+ rewrite ^/notebook-js\/(.*) /$1 permanent;
+}
+```
+
+## 日志
+
+/var/log/nginx
+
 ## 配置 nginx
 
 `cd` 到 `/etc/nginx` 这里存放 nginx 配置文件

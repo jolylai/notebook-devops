@@ -1,34 +1,5 @@
 # Start
 
-## Get Docker
-
-### Ubuntu
-
-```bash
-# sudo 普通用户希望用root权限执行
-# wget 下载命令
-# -qO(字母) 限制输出跟普通输出
-# | sh 用SH的方式执行
-sudo wget -qO- https://get.docker.com | sh
-
-# 这个命令的意思是把当前用户加入docker用户组。
-sudo usermod -aG docker 用户名
-
-# 安装 docker-compose
-curl https://github.com/docker/compose
-```
-
-### CentOS
-
-```bash
-# CentOS7 系统 CentOS-Extras 库中已带 Docker，可以直接安装：
-$ sudo yum install docker
-
-# 安装之后启动 Docker 服务，并让它随系统启动自动加载。
-$ sudo service docker start
-$ sudo chkconfig docker on
-```
-
 ## Overview
 
 ![devops](../.vuepress/images/docker/devops.png)
@@ -39,7 +10,7 @@ $ sudo chkconfig docker on
 
 ## Dockerfile
 
-Environment variables are supported by the following list of instructions in the [Dockerfile](https://docs.docker.com/engine/reference/builder/):
+[Dockerfile](https://docs.docker.com/engine/reference/builder/) 文件中支持的环境变量
 
 - ADD
 - COPY
@@ -52,24 +23,26 @@ Environment variables are supported by the following list of instructions in the
 - VOLUME
 - WORKDIR
 
-For example
-
-```Dockerfile
+```dockerfile
 # pulls node.js docker image from docker hub
 FROM node:8
-
-# The ARG instruction defines a variable
-# that users can pass at build-time to the builder with the
-# `docker build` command using the --build-arg <varname>=<value> flag.
-# docker build --build-arg ENV_TAG=prod .
-ARG ENV_TAG
-ENV ENV_TAG ${ENV_TAG}
 WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
 EXPOSE 8081
 CMD node index.js
+```
+
+`docker build` 传入环境变量,如：`docker build --build-arg ENV_TAG=prod .`，如果有多个环境变量的话 `docker build --build-arg ENV_TAG=prod --build-arg ENV_TAG=prod .`
+
+```dockerfile
+# The ARG instruction defines a variable
+# that users can pass at build-time to the builder with the
+# `docker build` command using the --build-arg <varname>=<value> flag.
+# docker build --build-arg ENV_TAG=prod .
+ARG ENV_TAG
+ENV ENV_TAG ${ENV_TAG}
 ```
 
 ## Image
@@ -81,12 +54,35 @@ CMD node index.js
 ```bash
 # docker images [OPTIONS] [REPOSITORY[:TAG]]
 
-# List the most recently created images
+# 列出最近创建的镜像
 $ docker images
 
-# List images by name and tag
-$ docker images java
-$ docker images java:0
+# 列出所有的镜像
+$ docker images -a
+
+# 根据 镜像名称 和 tag 列出镜像
+$ docker images node
+$ docker images node:8
+```
+
+显示格式
+
+```bash
+# 列出未加标签的镜像
+$ docker images --filter "dangling=true"
+
+# 列出镜像id全称
+$ docker images --no-trunc
+
+# 显示概要
+$ docker images --digests
+```
+
+格式化输出
+
+```bash
+$ docker images --format "{{.ID}}: {{.Repository}}"
+$ docker images --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
 ```
 
 ### 创建镜像
@@ -95,11 +91,19 @@ $ docker images java:0
 
 ```bash
 # docker build [OPTIONS] PATH | URL | -
-$ docker build -t [imageName] [pathToFolder]
+# docker build -t [imageName] [pathToFolder]
 $ docker build -t hello-world .
 
+# 如果没有传 tag 则默认为 latest
+$ docker build -t hello-world:2 .
+```
+
+传入环境变量
+
+```bash
+$ docker build --build-arg ENV_TAG=prod .
 # 多个环境变量
-$ docker build --build-arg HTTP=http://10:1234 --build-arg FTP=http://40:4567 .
+$ docker build --build-arg ENV_TAG=prod --build-arg HTTP=http://10:1234 .
 ```
 
 常用的 Options
@@ -122,6 +126,9 @@ $ docker commit [container] [imageName]
 ```bash
 # docker rmi [OPTIONS] IMAGE [IMAGE...]
 $ docker rmi [image]
+
+# 删除所有没有 tag 的镜像
+$ docker rmi $(docker images -f "dangling=true" -q)
 ```
 
 ### Tag
@@ -195,6 +202,9 @@ $ docker inspect [container]
 # 停止 continer
 $ docker stop [container]
 
+# 停用所有的运行中的容器
+$ docker stop $(docker ps -q)
+
 # 强制停止 container
 $ docker kill [container]
 
@@ -206,6 +216,14 @@ $ docker restart [container]
 
 # 删除 container
 $ docker rm [container]
+
+docker rm $(docker ps --filter ancestor=ubuntu)
+
+# 删除所有已退出的容器
+docker rm $(docker container ls -f "status=exited" -q)
+
+# 删除所有的容器
+ docker rm $(docker ps -aq)
 ```
 
 ## 容器交互模式
@@ -214,6 +232,7 @@ $ docker rm [container]
 
 ```bash
 $ docker exec -it <CONTAINER NAME> /bin/bash
+$ docker exec -it <CONTAINER NAME> /bin/sh
 ```
 
 退出容器交互模式

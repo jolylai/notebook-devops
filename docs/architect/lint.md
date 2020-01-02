@@ -84,3 +84,46 @@ $ yarn add --dev prettier pretty-quick husky
 - 自动化 UI 测试
 - 开发人员手动进行集成测试
 - 测试人员进行 3~4 轮的测试
+
+## prettier
+
+### .prettierrc
+
+```js
+{
+  "printWidth": 120,               // 换行字符串阈值
+  "semi": true,                    // 句末加分号
+  "singleQuote": true,             // 用单引号
+  "trailingComma": "es5",         // 最后一个对象元素加逗号
+  "bracketSpacing": true,          // 对象，数组加空格
+  "jsxBracketSameLine": false,     // jsx > 是否另起一行
+  "arrowParens": "avoid",          // (x) => {} 是否要有小括号
+  "requirePragma": false,          // 是否要注释来决定是否格式化代码
+  "proseWrap": "preserve"          // 是否要换行
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    }
+  ]
+}
+```
+
+### .prettierignore
+
+```
+package.json
+gatsby/**
+```
+
+## ESLint
+
+```js
+module.exports = {
+  rules: {
+    // 缩进
+    indent: ["error", 4, { SwitchCase: 1 }],
+    "arrow-parens": ["error", "as-needed"]
+  }
+};
+```
