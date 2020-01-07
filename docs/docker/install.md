@@ -1,19 +1,15 @@
 # Install
 
-> [mongo](https://hub-stage.docker.com/_/mongo/#!)
-
 ## MongoDB
 
-### 下载官方镜像
+> [mongo](https://hub.docker.com/_/mongo)
 
 ```bash
-docker pull mongo
-```
+$ docker pull mongo
 
-### 启动
+$ docker run --name docker-mongo -d mongo:tag
 
-```bash
-$ docker run -p 27017:27017 -v <LocalDirectoryPath>:/data/db --name docker_mongodb -d mongo
+$ docker run --name docker-mongo -v /my/own/datadir:/data/db -d mongo
 ```
 
 **Tip**
@@ -23,8 +19,67 @@ $ docker run -p 27017:27017 -v <LocalDirectoryPath>:/data/db --name docker_mongo
 - `--name` 为设置该容器的名称
 - `-d` 设置容器以守护进程方式运行
 
-### **进入 mongo 交互模式**
+### docker-compose.yml
+
+```dockerfile
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+```
+
+## MySQL
+
+> [MySQL](https://hub.docker.com/_/mysql)
 
 ```bash
-docker exec -it <CONTAINER NAME> /bin/bash
+# 从远程仓库拉取MySQL镜像
+$ docker pull mysql
+
+# 创建 MySQL 容器
+# $ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+# 设置 root 用户密码为 123456
+$ docker run --name docker-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+# 设置挂载点数据持久化
+# $ docker run --name some-mysql -v /my/own/datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+$ docker run --name docker-mysql -d -v /var/lib/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes mysql:5.6.43
+```
+
+### docker-compose
+
+```dockerfile
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 ```
