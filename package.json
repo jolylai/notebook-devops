@@ -1,27 +1,48 @@
 {
-  "name": "notebook-devops",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "private": true,
+  "name": "dumi-lib",
   "scripts": {
-    "start": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "start": "dumi dev",
+    "docs:build": "dumi build",
+    "build": "father-build",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^5.0.6",
+    "@ant-design/pro-table": "^2.1.6",
+    "@umijs/hooks": "^1.7.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.0.5",
+    "antd": "^4.1.2",
+    "axios": "^0.19.2",
+    "dumi": "^1.0.25",
+    "father-build": "^1.17.2",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "yorkie": "^2.0.0"
+  },
   "devDependencies": {
-    "husky": "^3.0.9",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^2.0.0",
-    "vuepress": "^1.0.2"
+    "@testing-library/jest-dom": "^5.3.0",
+    "@testing-library/react": "^10.0.2",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/jest": "^25.1.4",
+    "react-test-renderer": "^16.13.1"
   }
 }

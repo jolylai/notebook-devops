@@ -1,14 +1,27 @@
-# Devops
+# dumi library
 
-## start
+## Getting Started
+
+Install dependencies,
 
 ```bash
-$ git clone https://github.com/jolylai/notebook-devops.git
-$ cd notebook-devops
-$ yarn
-$ yarn start
+$ npm i
 ```
 
-## Online
+Start the dev server,
 
-[Devops](https://github.com/jolylai/notebook-devops.git)
+```bash
+$ npm start
+```
+
+Build documentation,
+
+```bash
+$ npm run docs:build
+```
+
+Build library via `father-build`,
+
+```bash
+$ npm run build
+```
