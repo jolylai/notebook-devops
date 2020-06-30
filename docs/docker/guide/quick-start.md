@@ -10,9 +10,42 @@ group:
   path: /guide
 ---
 
-## 安装
+## 官方安装
 
-### Ubuntu
+```bash
+# 1. 删除旧版本
+$ sudo yum remove docker \
+                docker-client \
+                docker-client-latest \
+                docker-common \
+                docker-latest \
+                docker-latest-logrotate \
+                docker-logrotate \
+                docker-engine
+# 需要的安装包
+$ sudo yum install -y yum-utils
+
+# 设置镜像库
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo  #
+
+# 更新 yum 软件包索引
+$ yum makecache fast
+
+# 安装最新版本的 docker
+# ce 社区版  ee 企业版
+$ sudo yum install docker-ce docker-ce-cli containerd.io
+
+# 启动 docker
+$ sudo systemctl start docker
+```
+
+images, containers, volumes, and networks 些内容都会在 `/var/lib/docker/`目录下
+
+## 快速安装
+
+Ubuntu
 
 ```bash
 # sudo 普通用户希望用root权限执行
@@ -28,7 +61,7 @@ sudo usermod -aG docker 用户名
 curl https://github.com/docker/compose
 ```
 
-### CentOS
+CentOS
 
 ```bash
 # CentOS7 系统 CentOS-Extras 库中已带 Docker，可以直接安装
@@ -41,96 +74,74 @@ $ sudo service docker start
 $ sudo chkconfig docker on
 ```
 
-# Docker Compose
+## 阿里云镜像加速
 
-[安装](https://docs.docker.com/compose/install/)
+登录阿里云，找到`产品服务 -> 弹性计算 -> 容器镜像服务`
 
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/WX20200528-172406@2x.png)
 
-sudo chmod +x /usr/local/bin/docker-compose
+![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/WX20200528-173239@2x.png)
+
+```shell
+sudo mkdir -p /etc/docker
+
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://s5uo2ev6.mirror.aliyuncs.com"]
+}
+EOF
+
+sudo systemctl daemon-reload
+
+sudo systemctl restart docker
 ```
 
-## MongoDB
+## Hello-World
 
-> [mongo](https://hub.docker.com/_/mongo)
+通过启动 `hello-world` 镜像测试 docker 是否已经正确安装
 
-```bash
-$ docker pull mongo
+```shell
+$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally  # 本地找不到镜像
+latest: Pulling from library/hello-world  # 下载镜像到本地
+0e03bdcc26d7: Pull complete
+Digest: sha256:6a65f928fb91fcfbc963f7aa6d57c8eeb426ad9a20c7ee045538ef34847f44f1
+Status: Downloaded newer image for hello-world:latest
 
-$ docker run --name docker-mongo -d mongo:tag
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
 
-$ docker run --name docker-mongo -v /my/own/datadir:/data/db -d mongo
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
 ```
 
-**Tip**
+![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/docker-run.svg)
 
-- `-p` 指定容器的端口映射，mongodb 默认端口为 27017
-- `-v` 为设置容器的挂载目录，这里是将即本机中的`<LocalDirectoryPath>`目录挂载到容器中的/data/db 中，作为 mongodb 的存储目录
-- `--name` 为设置该容器的名称
-- `-d` 设置容器以守护进程方式运行
+## 卸载
 
-```dockerfile
-# docker-compose.yml
+卸载 `Docker Engine`, `CLI`, 和 `Containerd` 包
 
-# Use root/example as user/password credentials
-version: '3.1'
-
-services:
-
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+```shell
+$ sudo yum remove docker-ce docker-ce-cli containerd.io
 ```
 
-## MySQL
+删除所有的`images`, `containers`, 和 `volumes`
 
-> [MySQL](https://hub.docker.com/_/mysql)
-
-```bash
-# 从远程仓库拉取MySQL镜像
-$ docker pull mysql
-
-# 创建 MySQL 容器
-# $ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
-# 设置 root 用户密码为 123456
-$ docker run --name docker-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
-
-# 设置挂载点数据持久化
-# $ docker run --name some-mysql -v /my/own/datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
-$ docker run --name docker-mysql -d -v /var/lib/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes mysql:5.6.43
-```
-
-```dockerfile
-# docker-compose
-
-# Use root/example as user/password credentials
-version: '3.1'
-
-services:
-
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+```shell
+$ sudo rm -rf /var/lib/docker
 ```
