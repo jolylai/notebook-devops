@@ -251,19 +251,25 @@ http {
     keepalive_timeout  65;
 
     server {
+        listen       80;
+        server_name  localhost;
         location / {
-                index  index.html;
-                root   /usr/share/nginx/html/;
-                location / {
-                    try_files $uri $uri/ /index.html;
-                }
+            root   /usr/share/nginx/html/;
+	        try_files $uri $uri/ @router;
+            index  index.html index.htm;
         }
-        location ~ /next/ {
-                index  index.html;
-                root   /usr/share/nginx/html/next/;
-                 location /next/ {
-                    try_files $uri $uri/ /index.html;
-                }
+
+		location /next {
+            alias   /usr/share/nginx/html/rm-front-pro/;
+            try_files $uri $uri/ /rm-front-pro/index.html index.html;
+            index  index.html index.htm;
+        }
+        location @router {
+            rewrite ^.*$ /index.html last;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
         }
     }
 
@@ -274,6 +280,5 @@ http {
     gzip_vary on;
     gzip_disable "MSIE [1-6]\.";
 
-    include /etc/nginx/conf.d/*.conf;
 }
 ```
