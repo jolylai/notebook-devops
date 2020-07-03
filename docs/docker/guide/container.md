@@ -1,134 +1,21 @@
 ---
-title: 命令行
+title: 容器
 ---
 
-## 帮助命令
-
-```bash
-# 查看docker 版本信息
-docker version
-
-docker info
-```
-
-## 镜像命令
-
-### docker images
+## 创建
 
 ```shell
-docker images [OPTIONS] [REPOSITORY[:TAG]]
+# 只创建容器
+$ docker create
+
+# 创建并运行 container
+$ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
-查看本地主机上的镜像
+创建并运行 container 后进入其 bash 控制台 `docker run -t -i [image] /bin/bash`
 
 ```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-nginx               1.15.2-alpine       36f3464a2197        22 months ago       18.6MB
-```
-
-- `-a`: 显示所有镜像（默认隐藏中间镜像）
-- `-q`: 只显示镜像 ID
-
-### docker search
-
-搜索镜像
-
-```shell
-root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker search mysql
-INDEX       NAME                DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-docker.io   docker.io/mysql     MySQL is a widely used, open-source relati...   9553      [OK]
-docker.io   docker.io/mariadb   MariaDB is a community-developed fork of M...   3471      [OK]
-```
-
-搜索 `mysql` 镜像 `stars` 数大于 5000
-
-```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker search mysql --filter=STARS=5000
-INDEX       NAME                DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-docker.io   docker.io/mysql     MySQL is a widely used, open-source relati...   9553      [OK]
-```
-
-### docker pull
-
-Usage: docker pull [OPTIONS] NAME[:TAG|@DIGEST]
-
-Pull an image or a repository from a registry
-下载镜像
-
-```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker pull mysql
-Using default tag: latest  # 不写tag 默认： last 即使用最新的版本
-Trying to pull repository docker.io/library/mysql ...
-latest: Pulling from docker.io/library/mysql
-afb6ec6fdc1c: Pull complete    # 分层下载 docker 镜像核心  联合文件系统
-0bdc5971ba40: Pull complete
-97ae94a2c729: Pull complete
-f777521d340e: Pull complete
-1393ff7fc871: Pull complete
-a499b89994d9: Pull complete
-7ebe8eefbafe: Pull complete
-597069368ef1: Pull complete
-ce39a5501878: Pull complete
-7d545bca14bf: Pull complete
-211e5bb2ae7b: Pull complete
-5914e537c077: Pull complete
-Digest: sha256:a31a277d8d39450220c722c1302a345c84206e7fd4cdb619e7face046e89031d  # 签名
-Status: Downloaded newer image for docker.io/mysql:latest   # 真实地址
-```
-
-指定版本下载
-
-```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker pull mysql:5.7
-Trying to pull repository docker.io/library/mysql ...
-5.7: Pulling from docker.io/library/mysql
-afb6ec6fdc1c: Already exists
-0bdc5971ba40: Already exists
-97ae94a2c729: Already exists
-f777521d340e: Already exists
-1393ff7fc871: Already exists
-a499b89994d9: Already exists
-7ebe8eefbafe: Already exists
-4eec965ae405: Pull complete
-a531a782d709: Pull complete
-270aeddb45e3: Pull complete
-b25569b61008: Pull complete
-Digest: sha256:d16d9ef7a4ecb29efcd1ba46d5a82bda3c28bd18c0f1e3b86ba54816211e1ac4
-Status: Downloaded newer image for docker.io/mysql:5.7
-```
-
-### docker rmi
-
-删除镜像
-
-```shell
-# 删除指定镜像 id
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker rmi -f 镜像id
-
-# 删除多个镜像
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker rmi -f 镜像id 镜像id 镜像id 镜像id
-
-# 删除所有镜像
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker rmi -f $(docker images -aq)
-```
-
-## 容器
-
-```shell
-docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
-```
-
-参数
-
-- `--name="Name"`: 容器名字，用来区分容器名字
-- `-d`: 后台方式运行
-- `-it`: 使用交互方式运行，进入容器查看内容
-- `-p`: 指定容器的端口
-- `-P`: 随机指定端口
-
-```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker run -it centos  /bin/bash
+$ docker run -it centos  /bin/bash
 
 # 查看容器内的 centos
 # 基础版本 很多命名都不是完善的
@@ -139,75 +26,57 @@ bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  s
 # 快捷键 control + p + q 退出容器不停止运行 回到主机
 [root@e41187d21e6c /]# exit
 exit
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]#
 ```
 
-查看运行的容器
+创建并运行 container 并让其在后台运行，并端口映射
 
 ```shell
-docker ps [OPTIONS]
+# docker run -p [port in container]:[port in physical system] -d [image] [command]
+$ docker run -p 4000:8081  hello-world
 ```
 
+参数
+
+- `--name="Name"`: 容器名字，用来区分容器名字
+- `-d`: 后台方式运行
+- `-it`: 使用交互方式运行，进入容器查看内容
+- `-p`: 指定容器的端口
+- `-P`: 随机指定端口
+
+## 查看
+
 ```bash
-# 列出正在运行的容器
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker ps
+# 查看正在运行的所有 container 信息
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
 33dd05bad49b        a00be011f00a        "nginx -g 'daemon ..."   7 days ago          Up 7 days           0.0.0.0:80->80/tcp   suspicious_yonath
 
-# 列出正在运行和已经停止运行的容器
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker ps -a
+# 查看所有 container ，包括正在运行和已经关闭的
+$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS                NAMES
 e41187d21e6c        centos              "/bin/bash"              10 minutes ago      Exited (0) 6 minutes ago                        peaceful_austin
 
 # 列出容器的id
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker ps -q
+$ docker ps -q
 33dd05bad49b
+
+# 查看最后创建的 container
+$ docker ps -l
+
+# 输出指定 container 的 stdout 信息（用来看 log ，效果和 tail -f 类似，会实时输出。）
+$ docker logs -f [container]
+
+# 获取 container 指定端口映射关系
+$ docker port [container] [port]
+
+# 查看 container 进程列表
+$ docker top [container]
+
+# 查看 container 详细信息
+$ docker inspect [container]
 ```
 
-### 删除
-
-```shell
-# 删除指定容器 不能删除正在运行的容器
-docker rm 容器id
-
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker rm 293413ff8b67
-Error response from daemon: You cannot remove a running container 293413ff8b67f65b4b1b034abc35785f5e3f1376ab1cb20f4cf11934aa526e44. Stop the container before attempting removal or use -f
-
-# 强制删除指定的容器
-docker rm -f 容器id
-
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker rm -f 293413ff8b67
-293413ff8b67
-
-
-# 删除所有的容器
-docker rm -f $(docker ps -aq)
-docker ps -a -q|xargs docker rm
-```
-
-### 启动
-
-```shell
-# 启动容器
-docker start 容器id
-
-# 重启容器
-docker restart 容器id
-```
-
-### 停止
-
-```shell
-# 停止当前正在运行的容器
-docker stop 容器id
-
-# 强制停止容器
-docker kill 容器id
-```
-
-## 其他常用命令
-
-### 查看日志
+查看日志
 
 ```shell
 docker logs -tf -tail 10 容器id
@@ -217,10 +86,10 @@ docker logs -tf -tail 10 容器id
 - `-f`: 跟随日志输出
 - `--tail string`: 输出日志的条数（默认输出所有）
 
-### 查看镜像元数据
+查看镜像元数据
 
 ```shell
-[root@iZwz9hqfjhnsbszaxamqqvZ ~]# docker inspect 33dd05bad49b
+$ docker inspect 33dd05bad49b
 [
     {
         "Id": "33dd05bad49b9b2f4a331e7746bb540a41e150ec0b82ca5d40219aa2d5573f29",
@@ -422,13 +291,85 @@ docker logs -tf -tail 10 容器id
 ]
 ```
 
-### 进入容器内部
+## 容器交互模式
 
-```shell
+进入容器交互模式
 
+```bash
+$ docker exec -it <CONTAINER NAME> /bin/bash
+$ docker exec -it <CONTAINER NAME> /bin/sh
 ```
 
-### 删除
+退出容器交互模式
+
+```bash
+exit
+
+# 或者
+
+Ctrl+P+Q
+```
+
+## 帮助命令
+
+```bash
+# 查看docker 版本信息
+docker version
+
+docker info
+```
+
+## 删除
+
+```shell
+# 删除指定容器
+docker rm 容器id
+
+# 不能删除正在运行的容器
+$ docker rm 293413ff8b67
+Error response from daemon: You cannot remove a running container 293413ff8b67f65b4b1b034abc35785f5e3f1376ab1cb20f4cf11934aa526e44. Stop the container before attempting removal or use -f
+
+# 强制删除指定的容器
+$ docker rm -f 293413ff8b67
+293413ff8b67
+
+# 删除所有的容器
+$ docker rm -f $(docker ps -aq)
+$ docker ps -a -q|xargs docker rm
+
+# 删除 container
+$ docker rm [container]
+
+$ docker rm $(docker ps --filter ancestor=ubuntu)
+
+# 删除所有已退出的容器
+$ docker rm $(docker container ls -f "status=exited" -q)
+```
+
+## 启动
+
+```shell
+# 启动一个已经停止的 container
+docker start 容器id
+
+# 重启 container (若 container 处于关闭状态，则直接启动)
+docker restart 容器id
+```
+
+## 停止
+
+```shell
+# 停止当前正在运行的容器
+$ docker stop [container]
+
+# 停用所有的运行中的容器
+$ docker stop $(docker ps -q)
+
+# 强制停止容器
+$ docker kill [container]
+```
+
+## 删除
 
 ```shell
 docker stop $(docker ps -aq)

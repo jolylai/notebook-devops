@@ -86,6 +86,8 @@ yarn run docs:deploy
 ```yaml
 language: node_js
 node_js: stable
+cache:
+  directories: node_modules
 branches:
   only:
     - master

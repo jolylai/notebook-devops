@@ -1,14 +1,23 @@
 ---
 title: 快速开始
-order: 10
+order: 1
 nav:
   title: Docker
-  path: /docker
-  order: 10
+  order: 1
 group:
   title: 快速上手
   path: /guide
 ---
+
+## 架构图
+
+![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/docker-architecture.svg)
+
+## Overview
+
+**Docker image**: It is an executable file which contains cutdown operating system and all the libraries and configuration needed to run the application. It has multiple layers stacked on top of each other and represented as single object. A docker image is created using docker file, we will get to that in a bit.
+
+**Docker Container**: It is a running instance of docker image. there can be many containers running from same docker image.
 
 ## 官方安装
 
