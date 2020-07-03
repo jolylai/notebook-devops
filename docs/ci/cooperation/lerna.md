@@ -2,7 +2,6 @@
 title: Lerna
 group:
   title: 协作
-  path: /collaboration
 ---
 
 `Lerna` 是一个用于管理包含多个 package 结构的代码仓库的工具，优化工作流。新版的 vue-cli、nuxt 与 babel 均使用 lerna 进行自身的 package 管理。

@@ -2,7 +2,6 @@
 title: 代码质量
 group:
   title: 协作
-  path: /collaboration
 ---
 
 ## 格式化代码

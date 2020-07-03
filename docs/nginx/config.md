@@ -18,6 +18,8 @@ main        # 全局配置，对全局生效
 └── ...
 ```
 
+## 日志配置
+
 ```nginx
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/

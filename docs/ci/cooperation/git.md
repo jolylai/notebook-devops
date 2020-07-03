@@ -2,7 +2,6 @@
 title: Git
 group:
   title: 协作
-  path: /collaboration
   order: 1
 ---
 

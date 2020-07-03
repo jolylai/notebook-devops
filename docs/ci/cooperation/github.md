@@ -2,10 +2,9 @@
 title: GitHub
 group:
   title: 协作
-  path: /collaboration
 ---
 
-## 提交代码
+## 初始化仓库
 
 ```bash
 echo "# NoteBook" >> README.md
@@ -22,11 +21,9 @@ git push -u origin master
 git remote set-url origin <new url>
 ```
 
-## 设置
+## 设置 SSH Key
 
-### SSH Key
-
-查看时是否已经生成 SSH Key
+提交代码时无需手动输入用户名密码，直接提交到远程仓库，简化代码提交，查看时是否已经生成 SSH Key
 
 ```bash
 $ cd ~/.ssh
@@ -34,7 +31,7 @@ $ ls
 id_rsa      id_rsa.pub      known_hosts
 ```
 
-生成 key
+如果已经生成 `id_rsa` ,`id_rsa.pub`, `known_hosts` 则可以直接使用，如果没有则执行以下代码生成 key
 
 ```bash
 ssh-keygen -t rsa -C "your.email@example.com" -b 4096
