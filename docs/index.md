@@ -18,6 +18,10 @@ features:
 footer: Copyright © 2020
 ---
 
+## 学习方式
+
+- 理解概念 实践 实践和理论相结合
+
 ## TODO
 
 - [单点登录](https://mp.weixin.qq.com/s/yVmvhbMs3iWSpXva7u5LGw)
