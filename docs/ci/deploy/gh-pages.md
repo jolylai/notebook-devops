@@ -4,7 +4,7 @@ title: Github Pages
 
 ## Github Pages
 
-Github 提供了免费的静态文件服务，我们只需将我们的最终生成的产物
+Github 提供了免费的静态文件服务，我们只需将我们的最终生成的静态文件上传到`gh-pages`分支上就能拥有一个属于自己的静态网站
 
 修改 `.umirc.js`，比如本项目的仓库名为 `notebook-devops`
 
@@ -72,6 +72,40 @@ yarn run docs:deploy
 ```
 
 ## 自动部署
+
+创建`.github/workflows/deploy.yml`
+
+```yml
+name: github pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.0
+        with:
+          node-version: '12.x'
+
+      - name: Cache dependencies
+        uses: c-hive/gha-yarn-cache@v1
+
+      - run: yarn
+      - run: yarn docs:build
+
+      - name: Deploy gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs-dist
+```
 
 代码提交到 Github 仓库时，使用 Travis 自动执行打包，并将`docs-dist`部署到 gh-pages 中
 
