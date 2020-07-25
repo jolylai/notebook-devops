@@ -2,6 +2,8 @@
 title: 阿里云
 ---
 
+创建 `.github/workflows/deploy.yml`
+
 ```yml
 name: Hexo build and deploy
 
