@@ -9,7 +9,7 @@ name: Hexo build and deploy
 
 on:
   push:
-    branches: [dev]
+    branches: [master]
 
 jobs:
   build:

@@ -71,7 +71,7 @@ yarn add gh-pages -D
 yarn run docs:deploy
 ```
 
-## 自动部署
+## Github Actions 自动部署
 
 创建`.github/workflows/deploy.yml`
 
@@ -108,6 +108,8 @@ jobs:
 ```
 
 代码提交到 Github 仓库时，使用 Travis 自动执行打包，并将`docs-dist`部署到 gh-pages 中
+
+## Travis 自动部署
 
 ### 生成 github tocken
 

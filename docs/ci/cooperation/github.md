@@ -53,6 +53,19 @@ xclip -sel clip < ~/.ssh/id_rsa.pub
 type %userprofile%\.ssh\id_rsa.pub | clip
 ```
 
+## [下载加速](https://hao.su/3415/)
+
+GitHub 镜像地址
+
+- https://github.com.cnpmjs.org
+- https://hub.fastgit.org
+
+GitHub raw 加速
+
+GitHub raw 域名并非 github.com 而是 raw.githubusercontent.com，上方的 GitHub 加速并不能加速这个域名，那么可以使用 Static CDN 提供的反代服务。
+
+将 `raw.githubusercontent.com` 替换为 `raw.staticdn.net` 即可加速。
+
 ## 工具
 
 使用的工具为[Travis](https://travis-ci.org/) [博客](https://voorhoede.github.io/front-end-tooling-recipes/travis-deploy-to-gh-pages/)
