@@ -25,6 +25,48 @@ yum install nginx
 sudo nginx -v
 ```
 
+启动 nginx
+
+```bash
+sudo systemctl start nginx
+```
+
+## 查看
+
+在浏览器中输入公网 IP 地址或者 网址 查看`nginx` 是否已经启动成功,如果启动成功的话就能看见 Nginx 的默认页面
+
+![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/nginx-default-page.png)
+
+如何查看 ip 地址
+
+```bash
+ip addr
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+```
+
+防火墙相关操作
+
+```bash
+systemctl status firewalld # 查看防火墙开启状态，显示running则是正在运行
+
+systemctl start firewalld  # 开启防火墙
+systemctl stop firewalld   # 关闭防火墙
+
+# 开启`http` 和`https`
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
+
+# 添加开启端口，--permanent表示永久打开，不加是临时打开重启之后失效
+sudo firewall-cmd --permanent --zone=public --add-port=8888/tcp
+
+sudo firewall-cmd --reload      # 重启防火墙，永久打开端口需要reload一下
+
+# 查看防火墙，添加的端口也可以看到
+firewall-cmd --list-all
+```
+
+## 结构
+
 `nginx` 将会安装在 `/etc/nginx/` 路径之下
 
 ```bash
@@ -54,46 +96,6 @@ sudo nginx -v
 
 - `/etc/nginx/conf.d/` 文件夹，是我们进行子配置的配置项存放处，`/etc/nginx/nginx.conf` 主配置文件会默认把这个文件夹中所有子配置项都引入；
 - `/usr/share/nginx/html/` 文件夹，通常静态文件都放在这个文件夹，也可以根据你自己的习惯放其他地方；
-
-## 启动
-
-```bash
-sudo systemctl start nginx
-```
-
-防火墙相关操作
-
-```bash
-systemctl status firewalld # 查看防火墙开启状态，显示running则是正在运行
-
-systemctl start firewalld  # 开启防火墙
-systemctl stop firewalld   # 关闭防火墙
-
-# 开启`http` 和`https`
-sudo firewall-cmd --permanent --zone=public --add-service=http
-sudo firewall-cmd --permanent --zone=public --add-service=https
-
-# 添加开启端口，--permanent表示永久打开，不加是临时打开重启之后失效
-sudo firewall-cmd --permanent --zone=public --add-port=8888/tcp
-
-sudo firewall-cmd --reload      # 重启防火墙，永久打开端口需要reload一下
-
-# 查看防火墙，添加的端口也可以看到
-firewall-cmd --list-all
-```
-
-## 查看
-
-在浏览器中输入公网 IP 地址或者 网址 查看`nginx` 是否已经启动成功,如果启动成功的话就能看见 Nginx 的默认页面
-
-![](https://cy-picgo.oss-cn-hangzhou.aliyuncs.com/nginx-default-page.png)
-
-如何查看 ip 地址
-
-```bash
-ip addr
-ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
-```
 
 ## 常用命令
 

@@ -5,35 +5,38 @@ title: 阿里云
 创建 `.github/workflows/deploy.yml`
 
 ```yml
-name: Hexo build and deploy
+name: Aliyun
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.0
         with:
-          persist-credentials: false
-          # checkout到你的hexo代码分支
-          ref: dev
-          # hexo需要加载内部子模块
-          submodules: true
-      - name: Install and Build
-        run: |
-          npm install
-          npm run build
+          node-version: '12.x'
+
+      - name: Cache dependencies
+        uses: c-hive/gha-yarn-cache@v1
+
+      - run: |
+          yarn install --production
+          yarn run build --prefix-paths
+
       - name: Deploy to aliyun server
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
           ARGS: '-avz --delete'
-          SOURCE: 'public'
+          SOURCE: 'public/'
           REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
           REMOTE_USER: 'root'
-          TARGET: '/root/dist/'
+          TARGET: '/usr/share/nginx/html/HappyLittleStack/'
 ```
