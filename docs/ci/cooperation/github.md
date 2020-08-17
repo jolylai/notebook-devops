@@ -66,6 +66,9 @@ GitHub raw 域名并非 github.com 而是 raw.githubusercontent.com，上方的 
 
 将 `raw.githubusercontent.com` 替换为 `raw.staticdn.net` 即可加速。
 
+release 下载
+https://github.com => http://github.strcpy.cn
+
 ## 工具
 
 使用的工具为[Travis](https://travis-ci.org/) [博客](https://voorhoede.github.io/front-end-tooling-recipes/travis-deploy-to-gh-pages/)
